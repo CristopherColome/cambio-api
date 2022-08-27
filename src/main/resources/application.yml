@@ -1,0 +1,30 @@
+server:
+  port: 8082
+
+
+spring:
+  main:
+    allow-circular-references: true
+  datasource:
+    url: jdbc:h2:mem:cambio
+    username: root
+    password: root
+    driverClassName: org.h2.Driver
+    initialization-mode: always
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: none
+
+logging:
+  level:
+    org:
+      springframework: DEBUG
+    com:
+      cambio: DEBUG
+
+com:
+  cambio:
+    security:
+      jwt-secret: YXBwbGljYXRpb25TZWNyZXRLZXlhcHBsaWNhdGlvblNlY3JldEtleWFwcGxpY2F0aW9uU2VjcmV0S2V5YXBwbGljYXRpb25TZWNyZXRLZXlhcHBsaWNhdGlvblNlY3JldEtleWFwcGxpY2F0aW9uU2VjcmV0S2V5YXBwbGljYXRpb25TZWNyZXRLZXlhcHBsaWNhdGlvblNlY3JldEtleWFwcGxpY2F0aW9uU2VjcmV0S2V5YXBwbGljYXRpb25TZWNyZXRLZXlhcHBsaWNhdGlvblNlY3JldEtleWFwcGxpY2F0aW9uU2VjcmV0S2V5YXBwbGljYXRpb25TZWNyZXRLZXlhcHBsaWNhdGlvblNlY3JldEtleWFwcGxpY2F0aW9uU2VjcmV0S2V5YXBwbGljYXRpb25TZWNyZXRLZXk=
+      jwt-expiration: 60000

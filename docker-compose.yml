@@ -1,0 +1,16 @@
+version: '3'
+services:
+  cambio-api-server:
+    container_name: cambio-api-server
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: ccolome/cambio-api:latest
+    ports:
+      - 8082:8082
+    networks:
+      - server-network
+
+networks:
+  server-network:
+    driver: bridge

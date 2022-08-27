@@ -1,0 +1,174 @@
+{
+	"info": {
+		"_postman_id": "58a3cb7f-f445-43c7-bcf6-f765bbdeea14",
+		"name": "Tipo-Cambio-API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "8368291"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "token",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\" : \"root\",\r\n    \"password\": \"root\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/auth/token",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "tipo-cambio",
+			"item": [
+				{
+					"name": "tipo-cambio",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"montoCambio\": 1000,\r\n    \"monedaOrigenNombre\": \"PEN\",\r\n    \"monedaDestinoNombre\": \"USD\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/tipo-cambio",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"tipo-cambio"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "tipo-cambio",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"tipoCambio\": 4.0\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/api/tipo-cambio",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"api",
+								"tipo-cambio"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{jwtToken}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"const postRequest = {",
+					"  url: 'http://localhost:8082/api/auth/token',",
+					"  method: 'POST',",
+					"  header: {",
+					"    \"content-type\": \"application/json\",",
+					"    \"accept\": \"application/json\",",
+					"  },",
+					"  body: {",
+					"     mode: 'raw',",
+					"     raw: JSON.stringify(",
+					"            {",
+					"             'username': 'root',",
+					"             'password': 'root'",
+					"            }",
+					"        )",
+					"  }",
+					"};",
+					"pm.sendRequest(postRequest, (error, response) => {",
+					"    ",
+					"    console.log(error ? error : response.json());",
+					"    ",
+					"    let responseJson =  response.json()",
+					"    ",
+					"    pm.collectionVariables.set(",
+					"        \"jwtToken\", ",
+					"        responseJson.token",
+					"    );",
+					"",
+					"});"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8082",
+			"type": "string"
+		},
+		{
+			"key": "jwtToken",
+			"value": ""
+		}
+	]
+}
