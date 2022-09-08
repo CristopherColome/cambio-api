@@ -2,9 +2,9 @@ name: Docker Image CI
 
 on:
   push:
-    branches: [ $default-branch ]
+    branches: [ "pipeline-test" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "pipeline-test" ]
 
 jobs:
 
